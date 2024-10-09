@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using HMISimulator.API.SDK;
 using HMISimulator.API.SDK.Oven.Responses;
 
 namespace HMISimulator.API.Oven;
@@ -7,7 +8,7 @@ internal sealed class GetOvenStatusEndpoint(IOvenSimulator ovenSimulator) : Endp
 {
     public override void Configure()
     {
-        Get("/oven/status");
+        Get(ApiEndpoints.Oven.Get);
         AllowAnonymous();
     }
 

@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using HMISimulator.API.SDK;
 using HMISimulator.API.SDK.Oven.Requests;
 
 namespace HMISimulator.API.Oven;
@@ -7,7 +8,7 @@ internal sealed class AddRecipeEndPoint(IOvenSimulator ovenSimulator) : Endpoint
 {
      public override void Configure()
      {
-         Post("/oven/add-recipe");
+         Post(ApiEndpoints.Oven.AddRecipe);
          Summary(s =>
              s.ExampleRequest = new AddRecipeRequest
              {

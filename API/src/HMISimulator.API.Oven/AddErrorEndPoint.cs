@@ -8,7 +8,7 @@ internal sealed class AddErrorEndPoint(IOvenSimulator ovenSimulator) : Endpoint<
 {
     public override void Configure()
     {
-        Post("/oven/add-error");
+        Post(ApiEndpoints.Oven.AddError);
         Summary(s =>
             s.ExampleRequest = new AddErrorRequest
             {

@@ -1,4 +1,5 @@
 ﻿using FastEndpoints;
+using HMISimulator.API.SDK;
 
 namespace HMISimulator.API.Oven;
 
@@ -6,7 +7,7 @@ internal sealed class StartOvenEndpoint(IOvenSimulator ovenSimulator) : Endpoint
 {
     public override void Configure()
     {
-        Post("/oven/start");
+        Post(ApiEndpoints.Oven.Start);
         AllowAnonymous();
     }
 
