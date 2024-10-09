@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\HMISimulator.API.SharedKernel\HMISimulator.API.SharedKernel.csproj" />
+    </ItemGroup>
+
+</Project>
