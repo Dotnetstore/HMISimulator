@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{55E6CBFF-35B9-44C2-97C2-F6C129B2C9F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMISimulator.API.SDK", "..\API\src\HMISimulator.API.SDK\HMISimulator.API.SDK.csproj", "{C6D41E64-9EA7-40F3-A90B-B341D3F827F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMISimulator.WPF.GUI", "src\HMISimulator.WPF.GUI\HMISimulator.WPF.GUI.csproj", "{FF48B8B3-9BF1-46EC-8876-00D976C42A72}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GUI", "GUI", "{58D81520-9DAB-4276-8CB9-81168E5A3AA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C6D41E64-9EA7-40F3-A90B-B341D3F827F0} = {55E6CBFF-35B9-44C2-97C2-F6C129B2C9F2}
+		{FF48B8B3-9BF1-46EC-8876-00D976C42A72} = {58D81520-9DAB-4276-8CB9-81168E5A3AA2}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6D41E64-9EA7-40F3-A90B-B341D3F827F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D41E64-9EA7-40F3-A90B-B341D3F827F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D41E64-9EA7-40F3-A90B-B341D3F827F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D41E64-9EA7-40F3-A90B-B341D3F827F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF48B8B3-9BF1-46EC-8876-00D976C42A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF48B8B3-9BF1-46EC-8876-00D976C42A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF48B8B3-9BF1-46EC-8876-00D976C42A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF48B8B3-9BF1-46EC-8876-00D976C42A72}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
