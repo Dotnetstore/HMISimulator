@@ -1,5 +1,6 @@
 ﻿using HMISimulator.API.SDK.Oven.Requests;
 using HMISimulator.API.SDK.Oven.Responses;
+using HMISimulator.API.SDK.Recipe.Responses;
 using Refit;
 
 namespace HMISimulator.API.SDK;
@@ -21,4 +22,7 @@ public interface IOvenService
     
     [Post(ApiEndpoints.Oven.AddError)]
     Task AddErrorAsync([Body] AddErrorRequest request);
+    
+    [Get(ApiEndpoints.Recipe.GetAll)]
+    ValueTask<IEnumerable<RecipeResponse>> GetAllRecipesAsync();
 }

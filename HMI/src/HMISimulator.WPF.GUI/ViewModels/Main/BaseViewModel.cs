@@ -1,6 +1,8 @@
-﻿namespace HMISimulator.WPF.GUI.ViewModels.Main;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public abstract class BaseViewModel
+namespace HMISimulator.WPF.GUI.ViewModels.Main;
+
+public abstract class BaseViewModel : ObservableObject
 {
     
 }

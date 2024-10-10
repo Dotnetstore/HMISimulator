@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
+using HMISimulator.API.SDK;
 using HMISimulator.WPF.GUI.Extensions;
 using HMISimulator.WPF.GUI.ViewModels.Main;
 using HMISimulator.WPF.GUI.Views.Main;
@@ -27,10 +28,11 @@ public partial class App
         _serviceCollection = new ServiceCollection();
         
         _serviceCollection
+            .AddHmiSimulatorApiSdk("https://localhost:7111")
             .AddGUI();
     }
 
-    private void SetCulture(string culture)
+    private static void SetCulture(string culture)
     {
         Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
         Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
@@ -42,7 +44,8 @@ public partial class App
     {
         using var scope = _serviceCollection.BuildServiceProvider().CreateScope();
         var viewModel = scope.ServiceProvider.GetRequiredService<IMainViewModel>();
-        var mainWindow = new MainView { DataContext = viewModel };
+        var mainWindow = scope.ServiceProvider.GetRequiredService<MainView>();
+        mainWindow.DataContext = viewModel;
         mainWindow.Show();
     }
 }

@@ -1,13 +1,15 @@
 using FastEndpoints;
 using FastEndpoints.Swagger;
-using HMISimulator.API.Oven;
+using HMISimulator.API.Oven.Extensions;
+using HMISimulator.API.SharedKernel.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddFastEndpoints()
     .SwaggerDocument()
-    .AddOven();
+    .AddSharedKernel()
+    .AddOven(builder.Configuration);
 
 var app = builder.Build();
 
