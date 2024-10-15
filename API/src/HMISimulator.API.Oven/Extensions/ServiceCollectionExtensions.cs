@@ -1,5 +1,7 @@
 ﻿using FastEndpoints;
+using HMISimulator.API.Oven.Ovens;
 using HMISimulator.API.Oven.Recipes;
+using HMISimulator.API.Oven.Services;
 using HMISimulator.API.SharedKernel.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,7 @@ public static class ServiceCollectionExtensions
             .AddHostedService<OvenSimulatorService>()
             .AddDbContext<OvenDataContext>($"Data Source={connectionString}")
             .AddSingleton<IOvenSimulator, OvenSimulator>()
+            .AddScoped<IOvenService, OvenService>()
             .AddScoped<IRecipeRepository, RecipeRepository>()
             .AddScoped<IRecipeService, RecipeService>()
             .AddScoped<IOvenUnitOfWork, OvenUnitOfWork>()

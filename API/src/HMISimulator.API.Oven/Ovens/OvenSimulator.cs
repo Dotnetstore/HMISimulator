@@ -1,9 +1,11 @@
-﻿using HMISimulator.API.SDK;
+﻿using HMISimulator.API.Oven.Recipes;
+using HMISimulator.API.SDK;
 
-namespace HMISimulator.API.Oven;
+namespace HMISimulator.API.Oven.Ovens;
 
 internal sealed class OvenSimulator : IOvenSimulator
 {
+    public Recipe? ActiveRecipe { get; set; }
     public double CurrentTemperature { get; set; }
     public double AmbientTemperature { get; set; }
     public double TargetTemperature { get; set; }
@@ -12,7 +14,8 @@ internal sealed class OvenSimulator : IOvenSimulator
 
     public double HeaterPowerPercentage { get; set; }
     public bool HeatingElementOn { get; set; }
-    private OvenErrorType CurrentError { get; set; } = OvenErrorType.None;
+    public OvenErrorType CurrentError { get; set; } = OvenErrorType.None;
+    
     private readonly Random _random = new();
 
     public OvenSimulator()
@@ -25,14 +28,6 @@ internal sealed class OvenSimulator : IOvenSimulator
         CurrentError = error;
     }
     
-    void IOvenSimulator.SetHeaterPower(double percentage)
-    {
-        if (CurrentError != OvenErrorType.HeaterFailure && CurrentError != OvenErrorType.GradualHeaterFailure)
-        {
-            HeaterPowerPercentage = Math.Clamp(percentage, 0.0, 100.0);
-        }
-    }
-
     // Method to simulate using the Runge-Kutta 4th order method
     void IOvenSimulator.RungeKuttaStep(double deltaTime)
     {
@@ -131,14 +126,23 @@ internal sealed class OvenSimulator : IOvenSimulator
 
     void IOvenSimulator.StartHeating()
     {
+        if (ActiveRecipe is null)
+            ArgumentException.ThrowIfNullOrEmpty("No recipe loaded");
+        
+        AmbientTemperature = ActiveRecipe!.AmbientTemperature;
+        TargetTemperature = ActiveRecipe.TargetTemperature;
+        HeatCapacity = ActiveRecipe.HeatCapacity;
+        HeatLossCoefficient = ActiveRecipe.HeatLossCoefficient;
+        HeaterPowerPercentage = ActiveRecipe.HeaterPowerPercentage;
+        
         HeatingElementOn = true;
     }
-
+    
     void IOvenSimulator.StopHeating()
     {
         HeatingElementOn = false;
     }
-
+    
     void IOvenSimulator.Update(double deltaTime)
     {
         if (HeatingElementOn)

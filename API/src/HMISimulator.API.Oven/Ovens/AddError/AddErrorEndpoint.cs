@@ -1,10 +1,12 @@
 ﻿using FastEndpoints;
+using FastEndpoints.Swagger;
 using HMISimulator.API.SDK;
 using HMISimulator.API.SDK.Oven.Requests;
+using Microsoft.AspNetCore.Http;
 
-namespace HMISimulator.API.Oven;
+namespace HMISimulator.API.Oven.Ovens.AddError;
 
-internal sealed class AddErrorEndPoint(IOvenSimulator ovenSimulator) : Endpoint<AddErrorRequest>
+internal sealed class AddErrorEndpoint(IOvenService ovenService) : Endpoint<AddErrorRequest>
 {
     public override void Configure()
     {
@@ -14,12 +16,16 @@ internal sealed class AddErrorEndPoint(IOvenSimulator ovenSimulator) : Endpoint<
             {
                 ErrorType = OvenErrorType.None
             });
+        Description(x =>
+            x.WithDescription("Add error to the oven")
+                .AutoTagOverride("Oven"));
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(AddErrorRequest req, CancellationToken ct)
     {
-        ovenSimulator.SimulateError(req.ErrorType);
+        ovenService.AddError(req);
+        
         await SendOkAsync(ct);
     }
 }

@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using HMISimulator.API.Oven.Ovens;
+using Microsoft.Extensions.Hosting;
 
-namespace HMISimulator.API.Oven;
+namespace HMISimulator.API.Oven.Services;
 
 internal sealed class OvenSimulatorService(
     IOvenSimulator ovenSimulator) : BackgroundService

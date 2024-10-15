@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using HMISimulator.API.SharedKernel.Repositories;
 
-namespace HMISimulator.API.Oven;
+namespace HMISimulator.API.Oven.Services;
 
 internal sealed class OvenUnitOfWork(OvenDataContext context) : IOvenUnitOfWork, IDisposable
 {

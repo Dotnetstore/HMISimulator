@@ -2,4 +2,6 @@
 
 public record struct GetOvenStatusResponse(
     double CurrentTemperature, 
-    bool HeatingElementOn);
+    bool HeatingElementOn,
+    string ActiveRecipe,
+    string CurrentError);

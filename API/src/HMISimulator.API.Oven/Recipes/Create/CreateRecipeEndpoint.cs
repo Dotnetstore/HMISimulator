@@ -35,7 +35,7 @@ internal sealed class CreateRecipeEndpoint(IRecipeService recipeService) : Endpo
 
         if (!recipe.IsSuccess)
         {
-            AddError(recipe.Errors.First());
+            AddError(string.Join(", ", recipe.Errors));
             await SendErrorsAsync(cancellation: ct);
         }
         else

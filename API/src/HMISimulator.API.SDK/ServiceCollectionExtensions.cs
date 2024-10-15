@@ -16,9 +16,9 @@ public static class ServiceCollectionExtensions
             AuthorizationHeaderValueGetter = (rq, ct) => Task.FromResult(authToken)
         };
         
-        services
-            .AddRefitClient<IOvenService>(refitSettings)
-            .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
+        // services
+        //     .AddRefitClient<IOvenService>(refitSettings)
+        //     .ConfigureHttpClient(c => c.BaseAddress = new Uri(baseAddress));
 
         return services;
     }

@@ -19,4 +19,7 @@ app
 
 app.Run();
 
-public partial class Program;
+namespace HMISimulator.API.WebAPI
+{
+    public partial class Program;
+}

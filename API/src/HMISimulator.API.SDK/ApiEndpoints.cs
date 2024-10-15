@@ -8,10 +8,10 @@ public static class ApiEndpoints
     {
         private const string OvenBase = $"{Api}/ovens";
         
+        public const string LoadRecipe = $"{OvenBase}/load-recipe";
         public const string Start = $"{OvenBase}/start";
         public const string Stop = $"{OvenBase}/stop";
         public const string Get = OvenBase;
-        public const string AddRecipe = $"{OvenBase}/add-recipe";
         public const string AddError = $"{OvenBase}/add-error";
     }
     
