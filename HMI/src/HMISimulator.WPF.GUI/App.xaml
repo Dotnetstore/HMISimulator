@@ -18,6 +18,9 @@
                 <views:MainView/>
             </DataTemplate>
             
+            <DataTemplate DataType="{x:Type oven:OvenControlViewModel}">
+                <oven1:OvenControlView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type oven:RecipeViewModel}">
                 <oven1:RecipeView/>
             </DataTemplate>

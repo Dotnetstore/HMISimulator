@@ -20,5 +20,6 @@ public static class ApiEndpoints
         private const string RecipeBase = $"{Api}/recipes";
         
         public const string GetAll = RecipeBase;
+        public const string Create = RecipeBase;
     }
 }

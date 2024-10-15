@@ -1,4 +1,6 @@
-﻿using HMISimulator.API.SharedKernel.Models;
+﻿using HMISimulator.API.Oven.Recipes.Create;
+using HMISimulator.API.SharedKernel.Models;
+using HMISimulator.API.SharedKernel.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -21,6 +23,11 @@ internal sealed class RecipeConfiguration : BaseAuditableEntityConfiguration<Rec
             .HasDatabaseName("Index_Id");
         
         builder
+            .HasIndex(x => x.Name)
+            .IsUnique()
+            .HasDatabaseName("Index_Name");
+        
+        builder
             .HasKey(x => x.Id);
         
         builder
@@ -31,7 +38,7 @@ internal sealed class RecipeConfiguration : BaseAuditableEntityConfiguration<Rec
 
         builder
             .Property(x => x.Name)
-            .HasMaxLength(50)
+            .HasMaxLength(DataSchemeConstants.NameMaxLength)
             .IsRequired()
             .IsUnicode();
 
@@ -54,5 +61,17 @@ internal sealed class RecipeConfiguration : BaseAuditableEntityConfiguration<Rec
         builder
             .Property(x => x.TargetTemperature)
             .IsRequired();
+
+        builder
+            .HasData(
+                CreateRecipeBuilder.CreateNewRecipe()
+                    .CreateRecipeId(Guid.Parse(DataSchemeConstants.DefaultRecipeIdValue))
+                    .SetRecipeName(DataSchemeConstants.DefaultRecipeNameValue)
+                    .SetRecipeHeatCapacity(DataSchemeConstants.DefaultHeatCapacityValue)
+                    .SetRecipeHeatLossCoefficient(DataSchemeConstants.DefaultHeatLossCoefficientValue)
+                    .SetRecipeHeaterPowerPercentage(DataSchemeConstants.DefaultHeaterPowerPercentageValue)
+                    .SetRecipeAmbientTemperature(DataSchemeConstants.DefaultAmbientTemperatureValue)
+                    .SetRecipeTargetTemperature(DataSchemeConstants.DefaultTargetTemperatureValue)
+                    .Build());
     }
 }

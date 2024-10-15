@@ -37,6 +37,13 @@ public static class ServiceCollectionExtensions
         context.Database.EnsureCreated();
     }
     
+    public static void EnsureDbDeleted<T>(this IServiceCollection services) where T : DbContext
+    {
+        using var scope = services.BuildServiceProvider().CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<T>();
+        context.Database.EnsureDeleted();
+    }
+    
     public static void RemoveDbContext<T>(this IServiceCollection services) where T : DbContext
     {
         var descriptor = services.SingleOrDefault(d => typeof(DbContextOptions<T>) == d.ServiceType);
@@ -44,5 +51,12 @@ public static class ServiceCollectionExtensions
         {
             services.Remove(descriptor);
         }
+    }
+    
+    public static void EnsureDbMigrated<T>(this IServiceCollection services) where T : DbContext
+    {
+        using var scope = services.BuildServiceProvider().CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<T>();
+        context.Database.Migrate();
     }
 }

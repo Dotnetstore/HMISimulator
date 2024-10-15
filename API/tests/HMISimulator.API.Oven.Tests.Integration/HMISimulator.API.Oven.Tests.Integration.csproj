@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\HMISimulator.API.Oven\HMISimulator.API.Oven.csproj" />
+      <ProjectReference Include="..\HMISimulator.API.TestHelper\HMISimulator.API.TestHelper.csproj" />
+    </ItemGroup>
+
+</Project>

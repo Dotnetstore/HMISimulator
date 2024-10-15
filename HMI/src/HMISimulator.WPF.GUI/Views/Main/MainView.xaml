@@ -4,208 +4,277 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:validations="clr-namespace:HMISimulator.WPF.GUI.Validations"
         mc:Ignorable="d"
-        Title="Oven Simulator" Height="500" Width="1500"
+        Title="Oven Simulator" Height="500" Width="900"
         Background="{DynamicResource MaterialDesignPaper}">
     <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         
-        <Grid Grid.Column="0" Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <!-- Navigation -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <!-- Title -->
-                <TextBlock 
-                    Grid.Row="0" 
-                    Text="Oven Simulator" 
-                    FontSize="24" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Top" Margin="0,0,0,0" 
-                    Foreground="{DynamicResource MaterialDesignBody}" />
-
-                <!-- Temperature Display -->
-                <TextBlock 
-                    Grid.Row="1" 
-                    Text="Temperature: 0°C" 
-                    FontSize="18" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Top" Margin="0,20,0,0"
-                    Foreground="{DynamicResource MaterialDesignBody}" 
-                    x:Name="TemperatureLabel"/>
-
-                <!-- Oven Status Display -->
-                <TextBlock 
-                    Grid.Row="2" 
-                    Text="Status: Idle" 
-                    FontSize="18" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Top" Margin="0,40,0,0"
-                    Foreground="{DynamicResource MaterialDesignBody}" 
-                    x:Name="StatusLabel"/>
-            </Grid>
-
-            <!-- Buttons Layout -->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0">
-            
-                <!-- Start Button -->
-                <Button Width="120" Height="50" Margin="10"
-                        Style="{StaticResource MaterialDesignRaisedButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="PlayCircleOutline" Width="24" Height="24"/>
-                        <TextBlock Text="Start" FontSize="18" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-            
-                <!-- Stop Button -->
-                <Button Width="120" Height="50" Margin="10"
-                        Style="{StaticResource MaterialDesignRaisedButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="StopCircleOutline" Width="24" Height="24"/>
-                        <TextBlock Text="Stop" FontSize="18" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-            
-                <!-- Emergency Stop Button -->
-                <Button  Width="160" Height="50" Margin="10"
-                         Style="{StaticResource MaterialDesignRaisedButton}"
-                         Background="Red" Foreground="White">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="AlertCircleOutline" Width="24" Height="24"/>
-                        <TextBlock Text="Emergency Stop" FontSize="18" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-            
-            <!-- Error Buttons -->
-            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50">
-            
-                <!-- Heater Failure Button -->
-                <Button Width="200" Height="40"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Fire" Width="24" Height="24"/>
-                        <TextBlock Text="Heater Failure" FontSize="18" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-            
-                <!-- Sensor Failure Button -->
-                <Button Width="200" Height="40"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="ThermometerLines" Width="24" Height="24"/>
-                        <TextBlock Text="Sensor Failure" FontSize="18" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-            
-                <!-- Thermostat Issue Button -->
-                <Button Width="210" Height="40"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Gauge" Width="24" Height="24"/>
-                        <TextBlock Text="Thermostat Issue" FontSize="18" Margin="10,0,0,0"/>
-                    </StackPanel>
-                    <!-- <materialDesign:PackIcon Kind="Gauge" Width="24" Height="24"/> -->
-                </Button>
-            </StackPanel>
-        </Grid>
-        
-        <StackPanel Grid.Column="1" Margin="20">
-            <TextBlock Text="Recipe Configuration" FontSize="24" HorizontalAlignment="Left" Margin="0,0,0,20"
-                       Foreground="{DynamicResource MaterialDesignBody}" />
-
-            <!-- HeatCapacity Input -->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <TextBlock Text="Heat Capacity:" VerticalAlignment="Center" Width="150" />
-                <TextBox Width="200" x:Name="HeatCapacityTextBox" materialDesign:HintAssist.Hint="Enter heat capacity">
-                    <TextBox.Text>
-                        <Binding Path="HeatCapacity" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validations:TemperatureRangeRule Min="100" Max="10000" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-
-            <!-- HeatLossCoefficient Input -->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <TextBlock Text="Heat Loss Coefficient:" VerticalAlignment="Center" Width="150" />
-                <TextBox Width="200" x:Name="HeatLossCoefficientTextBox" materialDesign:HintAssist.Hint="Enter heat loss coefficient">
-                    <TextBox.Text>
-                        <Binding Path="HeatLossCoefficient" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validations:TemperatureRangeRule Min="0.0" Max="0.9" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-
-            <!-- HeaterPowerPercentage Input -->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <TextBlock Text="Heater Power (%):" VerticalAlignment="Center" Width="150" />
-                <TextBox Width="200" x:Name="HeaterPowerPercentageTextBox" materialDesign:HintAssist.Hint="Enter power percentage">
-                  <TextBox.Text>
-                      <Binding Path="HeaterPowerPercentage" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                          <Binding.ValidationRules>
-                              <validations:TemperatureRangeRule Min="0" Max="100" />
-                          </Binding.ValidationRules>
-                      </Binding>
-                  </TextBox.Text>
-              </TextBox>
-            </StackPanel>
-
-            <!-- AmbientTemperature Input -->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <TextBlock Text="Ambient Temperature:" VerticalAlignment="Center" Width="150" />
-                <TextBox Width="200" x:Name="AmbientTemperatureTextBox" materialDesign:HintAssist.Hint="Enter ambient temperature">
-                    <TextBox.Text>
-                        <Binding Path="AmbientTemperature" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validations:TemperatureRangeRule Min="-10" Max="50" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-
-            <!-- TargetTemperature Input -->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <TextBlock Text="Target Temperature:" VerticalAlignment="Center" Width="150" />
-                <TextBox Width="200" x:Name="TargetTemperatureTextBox" materialDesign:HintAssist.Hint="Enter target temperature">
-                    <TextBox.Text>
-                        <Binding Path="TargetTemperature" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <validations:TemperatureRangeRule Min="100" Max="10000" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-
-            <!-- Apply Button -->
-            <Button Width="200" Height="40" Margin="0,20,0,0"
-                    HorizontalAlignment="Left"
-                    Style="{StaticResource MaterialDesignRaisedButton}">
+            <Button 
+                Grid.Column="0" 
+                Width="200" 
+                Height="40"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Command="{Binding OpenOvenControlCommand}">
                 <StackPanel Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="CheckCircle" Width="24" Height="24"/>
-                    <TextBlock Text="Apply Recipe" FontSize="18" Margin="10,0,0,0"/>
+                    <materialDesign:PackIcon 
+                        Kind="Oven"
+                        Width="24"
+                        Height="24"/>
+                    <TextBlock 
+                        Text="Oven control" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"/>
                 </StackPanel>
             </Button>
-        </StackPanel>
+            
+            <Button 
+                Grid.Column="1" 
+                Width="200" 
+                Height="40"
+                Style="{StaticResource MaterialDesignFlatButton}"
+                Command="{Binding OpenRecipeCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon 
+                        Kind="ViewList"
+                        Width="24"
+                        Height="24"/>
+                    <TextBlock 
+                        Text="Recipe" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+            
+            <Button 
+                Grid.Column="2" 
+                Width="200" 
+                Height="40"
+                Style="{StaticResource MaterialDesignFlatButton}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon 
+                        Kind="Login"
+                        Width="24"
+                        Height="24"/>
+                    <TextBlock 
+                        Text="Login" 
+                        FontSize="18" 
+                        Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+        
+        <ContentControl
+            Grid.Row="1"
+            Content="{Binding MainContent}"/>
+        <!-- <Grid.ColumnDefinitions> -->
+        <!--     <ColumnDefinition Width="*"/> -->
+        <!--     <ColumnDefinition Width="*"/> -->
+        <!-- </Grid.ColumnDefinitions> -->
+        <!-- -->
+        <!-- <Grid Grid.Column="0" Margin="20"> -->
+        <!--     <Grid.RowDefinitions> -->
+        <!--         <RowDefinition Height="Auto"/> -->
+        <!--         <RowDefinition Height="20"/> -->
+        <!--         <RowDefinition Height="Auto"/> -->
+        <!--         <RowDefinition Height="Auto"/> -->
+        <!--     </Grid.RowDefinitions> -->
+        <!--      -->
+        <!--     <Grid Grid.Row="0"> -->
+        <!--         <Grid.RowDefinitions> -->
+        <!--             <RowDefinition Height="Auto"/> -->
+        <!--             <RowDefinition Height="Auto"/> -->
+        <!--             <RowDefinition Height="Auto"/> -->
+        <!--         </Grid.RowDefinitions> -->
+        <!--         ~1~ Title @1@ -->
+        <!--         <TextBlock  -->
+        <!--             Grid.Row="0"  -->
+        <!--             Text="Oven Simulator"  -->
+        <!--             FontSize="24"  -->
+        <!--             HorizontalAlignment="Center"  -->
+        <!--             VerticalAlignment="Top" Margin="0,0,0,0"  -->
+        <!--             Foreground="{DynamicResource MaterialDesignBody}" /> -->
+        <!-- -->
+        <!--         ~1~ Temperature Display @1@ -->
+        <!--         <TextBlock  -->
+        <!--             Grid.Row="1"  -->
+        <!--             Text="Temperature: 0°C"  -->
+        <!--             FontSize="18"  -->
+        <!--             HorizontalAlignment="Center"  -->
+        <!--             VerticalAlignment="Top" Margin="0,20,0,0" -->
+        <!--             Foreground="{DynamicResource MaterialDesignBody}"  -->
+        <!--             x:Name="TemperatureLabel"/> -->
+        <!-- -->
+        <!--         ~1~ Oven Status Display @1@ -->
+        <!--         <TextBlock  -->
+        <!--             Grid.Row="2"  -->
+        <!--             Text="Status: Idle"  -->
+        <!--             FontSize="18"  -->
+        <!--             HorizontalAlignment="Center"  -->
+        <!--             VerticalAlignment="Top" Margin="0,40,0,0" -->
+        <!--             Foreground="{DynamicResource MaterialDesignBody}"  -->
+        <!--             x:Name="StatusLabel"/> -->
+        <!--     </Grid> -->
+        <!-- -->
+        <!--     ~1~ Buttons Layout @1@ -->
+        <!--     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"> -->
+        <!--      -->
+        <!--         ~1~ Start Button @1@ -->
+        <!--         <Button Width="120" Height="50" Margin="10" -->
+        <!--                 Style="{StaticResource MaterialDesignRaisedButton}"> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <materialDesign:PackIcon Kind="PlayCircleOutline" Width="24" Height="24"/> -->
+        <!--                 <TextBlock Text="Start" FontSize="18" Margin="10,0,0,0"/> -->
+        <!--             </StackPanel> -->
+        <!--         </Button> -->
+        <!--      -->
+        <!--         ~1~ Stop Button @1@ -->
+        <!--         <Button Width="120" Height="50" Margin="10" -->
+        <!--                 Style="{StaticResource MaterialDesignRaisedButton}"> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <materialDesign:PackIcon Kind="StopCircleOutline" Width="24" Height="24"/> -->
+        <!--                 <TextBlock Text="Stop" FontSize="18" Margin="10,0,0,0"/> -->
+        <!--             </StackPanel> -->
+        <!--         </Button> -->
+        <!--      -->
+        <!--         ~1~ Emergency Stop Button @1@ -->
+        <!--         <Button  Width="160" Height="50" Margin="10" -->
+        <!--                  Style="{StaticResource MaterialDesignRaisedButton}" -->
+        <!--                  Background="Red" Foreground="White"> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <materialDesign:PackIcon Kind="AlertCircleOutline" Width="24" Height="24"/> -->
+        <!--                 <TextBlock Text="Emergency Stop" FontSize="18" Margin="10,0,0,0"/> -->
+        <!--             </StackPanel> -->
+        <!--         </Button> -->
+        <!--     </StackPanel> -->
+        <!--      -->
+        <!--     ~1~ Error Buttons @1@ -->
+        <!--     <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50"> -->
+        <!--      -->
+        <!--         ~1~ Heater Failure Button @1@ -->
+        <!--         <Button Width="200" Height="40" -->
+        <!--                 Style="{StaticResource MaterialDesignFlatButton}"> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <materialDesign:PackIcon Kind="Fire" Width="24" Height="24"/> -->
+        <!--                 <TextBlock Text="Heater Failure" FontSize="18" Margin="10,0,0,0"/> -->
+        <!--             </StackPanel> -->
+        <!--         </Button> -->
+        <!--      -->
+        <!--         ~1~ Sensor Failure Button @1@ -->
+        <!--         <Button Width="200" Height="40" -->
+        <!--                 Style="{StaticResource MaterialDesignFlatButton}"> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <materialDesign:PackIcon Kind="ThermometerLines" Width="24" Height="24"/> -->
+        <!--                 <TextBlock Text="Sensor Failure" FontSize="18" Margin="10,0,0,0"/> -->
+        <!--             </StackPanel> -->
+        <!--         </Button> -->
+        <!--      -->
+        <!--         ~1~ Thermostat Issue Button @1@ -->
+        <!--         <Button Width="210" Height="40" -->
+        <!--                 Style="{StaticResource MaterialDesignFlatButton}"> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <materialDesign:PackIcon Kind="Gauge" Width="24" Height="24"/> -->
+        <!--                 <TextBlock Text="Thermostat Issue" FontSize="18" Margin="10,0,0,0"/> -->
+        <!--             </StackPanel> -->
+        <!--             ~1~ <materialDesign:PackIcon Kind="Gauge" Width="24" Height="24"/> @1@ -->
+        <!--         </Button> -->
+        <!--     </StackPanel> -->
+        <!-- </Grid> -->
+        <!-- -->
+        <!-- <StackPanel Grid.Column="1" Margin="20"> -->
+        <!--     <TextBlock Text="Recipe Configuration" FontSize="24" HorizontalAlignment="Left" Margin="0,0,0,20" -->
+        <!--                Foreground="{DynamicResource MaterialDesignBody}" /> -->
+        <!-- -->
+        <!--     ~1~ HeatCapacity Input @1@ -->
+        <!--     <StackPanel Orientation="Horizontal" Margin="0,10,0,10"> -->
+        <!--         <TextBlock Text="Heat Capacity:" VerticalAlignment="Center" Width="150" /> -->
+        <!--         <TextBox Width="200" x:Name="HeatCapacityTextBox" materialDesign:HintAssist.Hint="Enter heat capacity"> -->
+        <!--             <TextBox.Text> -->
+        <!--                 <Binding Path="HeatCapacity" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"> -->
+        <!--                     <Binding.ValidationRules> -->
+        <!--                         <validations:TemperatureRangeRule Min="100" Max="10000" /> -->
+        <!--                     </Binding.ValidationRules> -->
+        <!--                 </Binding> -->
+        <!--             </TextBox.Text> -->
+        <!--         </TextBox> -->
+        <!--     </StackPanel> -->
+        <!-- -->
+        <!--     ~1~ HeatLossCoefficient Input @1@ -->
+        <!--     <StackPanel Orientation="Horizontal" Margin="0,10,0,10"> -->
+        <!--         <TextBlock Text="Heat Loss Coefficient:" VerticalAlignment="Center" Width="150" /> -->
+        <!--         <TextBox Width="200" x:Name="HeatLossCoefficientTextBox" materialDesign:HintAssist.Hint="Enter heat loss coefficient"> -->
+        <!--             <TextBox.Text> -->
+        <!--                 <Binding Path="HeatLossCoefficient" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"> -->
+        <!--                     <Binding.ValidationRules> -->
+        <!--                         <validations:TemperatureRangeRule Min="0.0" Max="0.9" /> -->
+        <!--                     </Binding.ValidationRules> -->
+        <!--                 </Binding> -->
+        <!--             </TextBox.Text> -->
+        <!--         </TextBox> -->
+        <!--     </StackPanel> -->
+        <!-- -->
+        <!--     ~1~ HeaterPowerPercentage Input @1@ -->
+        <!--     <StackPanel Orientation="Horizontal" Margin="0,10,0,10"> -->
+        <!--         <TextBlock Text="Heater Power (%):" VerticalAlignment="Center" Width="150" /> -->
+        <!--         <TextBox Width="200" x:Name="HeaterPowerPercentageTextBox" materialDesign:HintAssist.Hint="Enter power percentage"> -->
+        <!--           <TextBox.Text> -->
+        <!--               <Binding Path="HeaterPowerPercentage" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"> -->
+        <!--                   <Binding.ValidationRules> -->
+        <!--                       <validations:TemperatureRangeRule Min="0" Max="100" /> -->
+        <!--                   </Binding.ValidationRules> -->
+        <!--               </Binding> -->
+        <!--           </TextBox.Text> -->
+        <!--       </TextBox> -->
+        <!--     </StackPanel> -->
+        <!-- -->
+        <!--     ~1~ AmbientTemperature Input @1@ -->
+        <!--     <StackPanel Orientation="Horizontal" Margin="0,10,0,10"> -->
+        <!--         <TextBlock Text="Ambient Temperature:" VerticalAlignment="Center" Width="150" /> -->
+        <!--         <TextBox Width="200" x:Name="AmbientTemperatureTextBox" materialDesign:HintAssist.Hint="Enter ambient temperature"> -->
+        <!--             <TextBox.Text> -->
+        <!--                 <Binding Path="AmbientTemperature" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"> -->
+        <!--                     <Binding.ValidationRules> -->
+        <!--                         <validations:TemperatureRangeRule Min="-10" Max="50" /> -->
+        <!--                     </Binding.ValidationRules> -->
+        <!--                 </Binding> -->
+        <!--             </TextBox.Text> -->
+        <!--         </TextBox> -->
+        <!--     </StackPanel> -->
+        <!-- -->
+        <!--     ~1~ TargetTemperature Input @1@ -->
+        <!--     <StackPanel Orientation="Horizontal" Margin="0,10,0,10"> -->
+        <!--         <TextBlock Text="Target Temperature:" VerticalAlignment="Center" Width="150" /> -->
+        <!--         <TextBox Width="200" x:Name="TargetTemperatureTextBox" materialDesign:HintAssist.Hint="Enter target temperature"> -->
+        <!--             <TextBox.Text> -->
+        <!--                 <Binding Path="TargetTemperature" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"> -->
+        <!--                     <Binding.ValidationRules> -->
+        <!--                         <validations:TemperatureRangeRule Min="100" Max="10000" /> -->
+        <!--                     </Binding.ValidationRules> -->
+        <!--                 </Binding> -->
+        <!--             </TextBox.Text> -->
+        <!--         </TextBox> -->
+        <!--     </StackPanel> -->
+        <!-- -->
+        <!--     ~1~ Apply Button @1@ -->
+        <!--     <Button Width="200" Height="40" Margin="0,20,0,0" -->
+        <!--             HorizontalAlignment="Left" -->
+        <!--             Style="{StaticResource MaterialDesignRaisedButton}"> -->
+        <!--         <StackPanel Orientation="Horizontal"> -->
+        <!--             <materialDesign:PackIcon Kind="CheckCircle" Width="24" Height="24"/> -->
+        <!--             <TextBlock Text="Apply Recipe" FontSize="18" Margin="10,0,0,0"/> -->
+        <!--         </StackPanel> -->
+        <!--     </Button> -->
+        <!-- </StackPanel> -->
     </Grid>
 </Window>

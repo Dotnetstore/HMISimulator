@@ -45,6 +45,7 @@ public partial class App
         using var scope = _serviceCollection.BuildServiceProvider().CreateScope();
         var viewModel = scope.ServiceProvider.GetRequiredService<IMainViewModel>();
         var mainWindow = scope.ServiceProvider.GetRequiredService<MainView>();
+        viewModel.Load();
         mainWindow.DataContext = viewModel;
         mainWindow.Show();
     }

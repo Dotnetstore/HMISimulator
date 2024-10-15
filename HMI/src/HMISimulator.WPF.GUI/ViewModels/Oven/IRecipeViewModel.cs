@@ -4,4 +4,5 @@ namespace HMISimulator.WPF.GUI.ViewModels.Oven;
 
 public interface IRecipeViewModel : IBaseViewModel
 {
+    ValueTask LoadAsync();
 }

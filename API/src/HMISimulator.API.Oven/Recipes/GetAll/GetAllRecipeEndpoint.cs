@@ -1,6 +1,8 @@
 ﻿using FastEndpoints;
+using FastEndpoints.Swagger;
 using HMISimulator.API.SDK;
 using HMISimulator.API.SDK.Recipe.Responses;
+using Microsoft.AspNetCore.Http;
 
 namespace HMISimulator.API.Oven.Recipes.GetAll;
 
@@ -9,6 +11,9 @@ internal sealed class GetAllRecipeEndpoint(IRecipeService recipeService) : Endpo
     public override void Configure()
     {
         Get(ApiEndpoints.Recipe.GetAll);
+        Description(x =>
+            x.WithDescription("Get all recipes")
+             .AutoTagOverride("Recipes"));
         AllowAnonymous();
     }
 
