@@ -2,4 +2,4 @@
 
 namespace HMISimulator.API.Oven.Services;
 
-public interface IOvenUnitOfWork : IUnitOfWork; 
+internal interface IOvenUnitOfWork : IUnitOfWork; 

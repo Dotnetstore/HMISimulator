@@ -17,6 +17,7 @@ internal sealed class RecipeRepository(IOvenUnitOfWork unitOfWork) : IRecipeRepo
         var query = GetRecipeQuery();
         
         return await query
+            .AsNoTracking()
             .ToListAsync(cancellationToken);
     }
 

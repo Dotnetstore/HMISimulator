@@ -12,7 +12,7 @@ internal sealed class OvenDataContext(DbContextOptions<OvenDataContext> options)
     {
         base.OnModelCreating(modelBuilder);
         
-        //modelBuilder.HasDefaultSchema("Oven");
+        modelBuilder.HasDefaultSchema("Oven");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(IOvenAssemblyMarker).Assembly);
     }
 }

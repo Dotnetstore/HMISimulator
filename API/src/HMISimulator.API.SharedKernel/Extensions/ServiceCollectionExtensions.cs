@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
         
         services.AddDbContext<T>(options =>
         {
-            options.UseSqlite(connectionString);
+            options.UseSqlServer(connectionString);
         });
         
         return services;
