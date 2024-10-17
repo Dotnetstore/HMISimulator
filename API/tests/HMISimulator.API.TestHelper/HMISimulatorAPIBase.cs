@@ -1,5 +1,4 @@
 ﻿using FastEndpoints.Testing;
-using HMISimulator.API.WebAPI;
 
 namespace HMISimulator.API.TestHelper;
 

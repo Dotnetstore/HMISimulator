@@ -1,4 +1,4 @@
-﻿using HMISimulator.API.Oven.Recipes;
+﻿using HMISimulator.API.Contracts.Recipes;
 using HMISimulator.API.SDK;
 
 namespace HMISimulator.API.Oven.Ovens;

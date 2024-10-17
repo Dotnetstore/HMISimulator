@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Reflection;
+using FastEndpoints;
 using HMISimulator.API.Oven.Health;
 using HMISimulator.API.Oven.Ovens;
 using HMISimulator.API.Oven.Recipes;
@@ -12,10 +13,11 @@ namespace HMISimulator.API.Oven.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddOven(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddOven(this IServiceCollection services,
+        IConfiguration configuration, List<Assembly> mediatRAssemblies)
     {
+        mediatRAssemblies.Add(typeof(IOvenAssemblyMarker).Assembly);
+
         var connectionString = configuration.GetValue<string>("ConnectionStrings:DefaultConnection");
         ArgumentException.ThrowIfNullOrWhiteSpace(connectionString, nameof(connectionString));
 

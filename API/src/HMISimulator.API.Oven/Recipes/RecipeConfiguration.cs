@@ -1,4 +1,5 @@
-﻿using HMISimulator.API.Oven.Recipes.Create;
+﻿using HMISimulator.API.Contracts.Recipes;
+using HMISimulator.API.Oven.Recipes.Create;
 using HMISimulator.API.SharedKernel.Models;
 using HMISimulator.API.SharedKernel.Services;
 using Microsoft.EntityFrameworkCore;

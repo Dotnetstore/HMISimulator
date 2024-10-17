@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Reflection;
+using FastEndpoints;
 using HMISimulator.API.SharedKernel.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,8 +8,10 @@ namespace HMISimulator.API.SharedKernel.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddSharedKernel(this IServiceCollection services)
+    public static IServiceCollection AddSharedKernel(this IServiceCollection services, List<Assembly> mediatRAssemblies)
     {
+        mediatRAssemblies.Add(typeof(ISharedKernelAssemblyMarker).Assembly);
+
         services
             .AddFastEndpoints()
             .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

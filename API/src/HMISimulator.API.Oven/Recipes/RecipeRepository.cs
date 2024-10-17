@@ -1,4 +1,5 @@
-﻿using HMISimulator.API.Oven.Services;
+﻿using HMISimulator.API.Contracts.Recipes;
+using HMISimulator.API.Oven.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace HMISimulator.API.Oven.Recipes;

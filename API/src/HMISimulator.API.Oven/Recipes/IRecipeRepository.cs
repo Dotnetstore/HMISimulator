@@ -1,4 +1,6 @@
-﻿namespace HMISimulator.API.Oven.Recipes;
+﻿using HMISimulator.API.Contracts.Recipes;
+
+namespace HMISimulator.API.Oven.Recipes;
 
 internal interface IRecipeRepository
 {

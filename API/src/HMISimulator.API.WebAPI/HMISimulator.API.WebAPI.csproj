@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\HMISimulator.API.Amazon\HMISimulator.API.Amazon.csproj" />
       <ProjectReference Include="..\HMISimulator.API.Oven\HMISimulator.API.Oven.csproj" />
     </ItemGroup>
 

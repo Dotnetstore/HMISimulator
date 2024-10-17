@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using HMISimulator.API.Contracts.Recipes;
 using HMISimulator.API.Oven.Recipes.GetAll;
 using HMISimulator.API.SharedKernel.Services;
 

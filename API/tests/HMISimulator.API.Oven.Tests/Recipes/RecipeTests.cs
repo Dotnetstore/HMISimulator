@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
-using HMISimulator.API.Oven.Recipes;
+using HMISimulator.API.Contracts.Recipes;
 using Xunit;
 
 namespace HMISimulator.API.Oven.Tests.Recipes;

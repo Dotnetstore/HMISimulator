@@ -1,6 +1,6 @@
 ﻿using HMISimulator.API.SharedKernel.Models;
 
-namespace HMISimulator.API.Oven.Recipes;
+namespace HMISimulator.API.Contracts.Recipes;
 
 public sealed class Recipe : BaseAuditableEntity
 {

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using HMISimulator.API.Contracts.Recipes;
 using HMISimulator.API.Oven.Recipes;
 using HMISimulator.API.SharedKernel.Services;
 using Microsoft.EntityFrameworkCore;

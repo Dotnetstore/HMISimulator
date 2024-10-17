@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using HMISimulator.API.Contracts.Recipes;
 using HMISimulator.API.Oven.Recipes;
 using Xunit;
 
